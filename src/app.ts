@@ -1,6 +1,6 @@
 import express, { Application, json } from 'express'
 import { router } from './routers'
-import { handleErrors } from './middlewares/handleErrors'
+import { handleErrors } from './middlewares/handleErrors.middleware'
 
 export const app: Application = express()
 
