@@ -28,6 +28,11 @@ export const updateUserSchema = createUserSchema.pick({
   avatar: true
 }).partial()
 
+export const updateUserPasswordSchema = userSchema.pick({
+  password: true,
+  password_recovery: true
+})
+
 export const sessionSchema = userSchema.pick({
   email: true,
   password: true
