@@ -7,7 +7,10 @@ export const createUserController = async (req: Request, res: Response): Promise
 
   return res.status(200).json(user)
 }
-// export const createUserController = async (req: Request, res: Response): Promise<Response> => {}
+
+export const readUserProfileController = async (req: Request, res: Response): Promise<Response> => {
+  return res.status(200).json(res.locals.user)
+}
 // export const createUserController = async (req: Request, res: Response): Promise<Response> => {}
 // export const createUserController = async (req: Request, res: Response): Promise<Response> => {}
 // export const createUserController = async (req: Request, res: Response): Promise<Response> => {}

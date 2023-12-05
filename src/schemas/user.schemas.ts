@@ -20,3 +20,7 @@ export const returnUserSchema = userSchema.omit({
   password_recovery: true
 })
 export const updateUserSchema = createUserSchema.partial()
+export const sessionSchema = userSchema.pick({
+  email: true,
+  password: true
+})
