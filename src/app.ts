@@ -1,6 +1,9 @@
 import express, { Application, json } from 'express'
 import { router } from './routers'
 import { handleErrors } from './middlewares/handleErrors.middleware'
+import { PrismaClient } from '@prisma/client'
+
+export const prisma: PrismaClient = new PrismaClient()
 
 export const app: Application = express()
 

@@ -15,7 +15,7 @@ export const createUserSchema = userSchema.omit({
   password_recovery: true,
   created_at: true
 })
-export const readUserSchema = userSchema.omit({
+export const returnUserSchema = userSchema.omit({
   password: true,
   password_recovery: true
 })
