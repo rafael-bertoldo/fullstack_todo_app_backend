@@ -37,15 +37,7 @@ export const verifyEmail = async (req: Request, res: Response, next: NextFunctio
 // export const verifyUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 //   const headers = req.headers
   
-//   const user = await prisma.user.findUnique({
-//     where: {
-//       id
-//     }
-//   })
-
-//   if(!user) throw new AppError('User not found', 404)
-
-//   res.locals = {...res.locals, user}
+//   console.log(headers)
   
 //   return next()
 // }
