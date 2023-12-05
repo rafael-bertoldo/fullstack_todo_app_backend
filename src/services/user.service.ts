@@ -31,7 +31,6 @@ export const readUserProfileService = async (email: string): Promise<UserReturn>
 }
 
 export const updateUserService = async (data: UserUpdate, id: string): Promise<UserReturn> => {
-  console.log('oi')
   const user: User = await prisma.user.update({
     where: {
       id
@@ -40,4 +39,15 @@ export const updateUserService = async (data: UserUpdate, id: string): Promise<U
   })
 
   return returnUserSchema.parse(user)
+}
+
+export const deleteUserService = async (id: string): Promise<void> => {
+  await prisma.user.update({
+    where: {
+      id
+    },
+    data: {
+      active: false
+    }
+  }) 
 }

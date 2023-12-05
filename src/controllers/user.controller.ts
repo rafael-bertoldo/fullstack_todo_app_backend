@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserReturn } from "../interfaces/user.interface";
-import { createUserService, readUserProfileService, updateUserService } from "../services/user.service";
+import { createUserService, deleteUserService, readUserProfileService, updateUserService } from "../services/user.service";
 
 export const createUserController = async (req: Request, res: Response): Promise<Response> => {
   const user: UserReturn = await createUserService(req.body)
@@ -19,6 +19,11 @@ export const updateUserController = async (req: Request, res: Response): Promise
   return res.status(200).json(user)
 }
 
-// export const createUserController = async (req: Request, res: Response): Promise<Response> => {}
+export const deleteUserController = async (req: Request, res: Response): Promise<Response> => {
+  await deleteUserService(res.locals.decoded.sub)
+
+  return res.status(200).json({message: 'User deleted successfully'})
+}
+
 // export const createUserController = async (req: Request, res: Response): Promise<Response> => {}
 // export const createUserController = async (req: Request, res: Response): Promise<Response> => {}

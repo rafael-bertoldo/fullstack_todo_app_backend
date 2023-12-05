@@ -7,7 +7,8 @@ export const userSchema = z.object({
   password: z.string(),
   password_recovery: z.string(),
   avatar: z.string(),
-  created_at: z.date()
+  created_at: z.date(),
+  active: z.boolean().default(true)
 })
 
 export const createUserSchema = userSchema.omit({
