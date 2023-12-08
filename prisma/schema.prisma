@@ -25,11 +25,17 @@ model User {
 }
 
 model Todo {
-  id      String @id @unique @default(uuid())
-  title   String @unique @db.VarChar(255)
-  content String @db.Text
-  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  id      String     @id @unique @default(uuid())
+  title   String     @unique @db.VarChar(255)
+  content String     @db.Text
+  status  TodoStatus @default(PENDING)
+  user    User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String
 
   @@map("todos")
+}
+
+enum TodoStatus {
+  PENDING
+  COMPLETE
 }

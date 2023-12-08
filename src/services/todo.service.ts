@@ -14,10 +14,21 @@ export const createTodoService = async (data: TodoCreate, user_id: string): Prom
   return todo
 }
 
-export const readTodoService = async (user_id: string): Promise<TodoArrayReturn> => {
+export const readPendingTodoService = async (user_id: string): Promise<TodoArrayReturn> => {
   const todos: TodoArrayReturn = await prisma.todo.findMany({
     where: {
-      user_id
+      user_id,
+      status: 'PENDING'
+    }
+  })
+
+  return todos
+}
+
+export const readAllTodoService = async (user_id: string): Promise<TodoArrayReturn> => {
+  const todos: TodoArrayReturn = await prisma.todo.findMany({
+    where: {
+      user_id,
     }
   })
 
@@ -47,4 +58,16 @@ export const updateTodoService = async (data: TodoUpdate, user_id: string, todo_
   })
 
   return todo
+}
+
+export const deleteTodoService = async (user_id: string, todo_id: string): Promise<void> => {
+  await prisma.todo.update({
+    where: {
+      user_id,
+      id: todo_id
+    },
+    data: {
+      status: 'COMPLETE'
+    }
+  })
 }

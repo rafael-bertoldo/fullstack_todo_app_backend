@@ -4,11 +4,13 @@ export const todoSchema = z.object({
   id: z.string(),
   title: z.string(),
   content: z.string(),
+  status: z.string(),
   user_id: z.string()
 })
 
 export const createTodoSchema = todoSchema.omit({
   id: true,
+  status: true,
   user_id: true
 })
 
