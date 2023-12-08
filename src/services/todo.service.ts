@@ -1,4 +1,4 @@
-import { Todo, TodoArrayReturn, TodoCreate, TodoReturn } from "../interfaces/todo.interface";
+import { Todo, TodoArrayReturn, TodoCreate, TodoReturn, TodoUpdate } from "../interfaces/todo.interface";
 import {prisma} from '../app'
 import { AppError } from "../errors/AppError.errors";
 
@@ -33,6 +33,18 @@ export const readOneTodoService = async (user_id: string, todo_id: string): Prom
   })
 
   if(!todo) throw new AppError('Todo not found', 404)
+
+  return todo
+}
+
+export const updateTodoService = async (data: TodoUpdate, user_id: string, todo_id: string): Promise<TodoReturn> => {
+  const todo: TodoReturn = await prisma.todo.update({
+    where: {
+      id: todo_id,
+      user_id
+    },
+    data
+  })
 
   return todo
 }

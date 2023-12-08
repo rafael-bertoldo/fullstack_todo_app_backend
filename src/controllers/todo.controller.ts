@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createTodoService, readOneTodoService, readTodoService } from "../services/todo.service";
+import { createTodoService, readOneTodoService, readTodoService, updateTodoService } from "../services/todo.service";
 import { Todo, TodoArrayReturn, TodoReturn } from "../interfaces/todo.interface";
 
 export const createTodoController = async (req: Request, res: Response): Promise<Response> => {
@@ -22,6 +22,12 @@ export const readOneTodoController = async (req: Request, res: Response): Promis
   return res.status(200).json(todo)
 }
 
-// export const createTodoController = async (req: Request, res: Response): Promise<Response> => {}
+export const updateTodoController = async (req: Request, res: Response): Promise<Response> => {
+  const {todo_id} = req.params
+
+  const todo: TodoReturn = await updateTodoService(req.body, res.locals.decoded.sub, todo_id)
+
+  return res.status(200).json(todo)
+}
 
 // export const createTodoController = async (req: Request, res: Response): Promise<Response> => {}
