@@ -5,13 +5,14 @@ import { createUserSchema, updateUserPasswordSchema, updateUserSchema } from "..
 import { createUserController, deleteUserController, readUserProfileController, updateUserController, updateUserPasswordController } from "../controllers/user.controller";
 import { verifyToken } from "../middlewares/ensureAuth.middleware";
 import { emailController } from "../controllers/email.controller";
+import { upload } from "../middlewares/multer.middleware";
 
 export const userRouter: Router = Router()
 
-userRouter.post('/', validateBody(createUserSchema), verifyEmail, verifyUsername, createUserController)
+userRouter.post('/', upload.single('avatar'), verifyEmail, verifyUsername, createUserController)
 userRouter.use(verifyToken)
 userRouter.get('/profile', readUserProfileController)
-userRouter.patch('/profile', validateBody(updateUserSchema), verifyEmail, verifyUsername, updateUserController)
+userRouter.patch('/profile', upload.single('avatar'), verifyEmail, verifyUsername, updateUserController)
 userRouter.patch('/password', validateBody(updateUserPasswordSchema), updateUserPasswordController)
 userRouter.delete('/profile', deleteUserController)
-userRouter.post('/recovery_password', emailController)
+userRouter.post('/password_recovery', emailController)
